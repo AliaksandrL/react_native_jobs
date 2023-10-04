@@ -1,22 +1,19 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-
 
 const useFetch = (endpoint, query) => {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const axios = require('axios');
-
     const options = {
-        method: 'GET',
+        method: "GET",
         url: `https://jsearch.p.rapidapi.com/${endpoint}`,
-        params: {...query},
         headers: {
-            'X-RapidAPI-Key': '4567c9780dmshd792582f0e00bfbp193b82jsn13c2dff6c3ee',
-            'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
-        }
+            "X-RapidAPI-Key": '4567c9780dmshd792582f0e00bfbp193b82jsn13c2dff6c3ee',
+            "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
+        },
+        params: { ...query },
     };
 
     const fetchData = async () => {
@@ -29,11 +26,11 @@ const useFetch = (endpoint, query) => {
             setIsLoading(false);
         } catch (error) {
             setError(error);
-            alert('There is an error')
+            console.log(error)
         } finally {
             setIsLoading(false);
         }
-    }
+    };
 
     useEffect(() => {
         fetchData();
@@ -42,9 +39,9 @@ const useFetch = (endpoint, query) => {
     const refetch = () => {
         setIsLoading(true);
         fetchData();
-    }
+    };
 
-    return {data, isLoading, error, refetch};
-}
+    return { data, isLoading, error, refetch };
+};
 
-export default useFetch
+export default useFetch;
